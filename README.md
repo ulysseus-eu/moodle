@@ -20,6 +20,14 @@ The build process of the docker image is reflected by the contents of
 `Makefile`. The following sections describe the steps on the way to a
 working image and will also name the makefile target.
 
+## In a Nutshell
+
+Copy `config.php-sample` to `config.php`, edit at will and run
+
+```
+make build
+```
+
 ## Fetch Moodle Sources
 
 See [moodle page on git](https://docs.moodle.org/39/en/Git_for_Administrators)
