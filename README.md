@@ -34,6 +34,12 @@ Note: in the Makefile this step is split into to targets `moodle` and
 `update-moodle`. While `moodle` will simply create the `moodle` directory
 the latter step is used to fetch the latest version of the moodle branch.
 
+## Configuration
+
+The container will not call the moodle install script and will instead use its
+own `config.php`. A sample configuration file is available in the repository
+under `config.php-sample`.
+
 ## Build Container
 
 Run

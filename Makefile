@@ -21,5 +21,5 @@ moodle:
 update-moodle: moodle
 	git -C moodle checkout $(MOODLE_BRANCH)
 
-build: update-moodle
+build: update-moodle config.php moodle
 	docker build -t $(DOCKER_IMAGE_NAME) .
