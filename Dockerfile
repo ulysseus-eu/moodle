@@ -1,8 +1,8 @@
 FROM moodlehq/moodle-php-apache:7.4
 
-COPY moodle /var/www/html
-COPY config.php /var/www/html/
+COPY --chown=www-data:www-data moodle /var/www/html
+COPY --chown=www-data:www-data config.php /var/www/html/
 
-RUN chown --recursive www-data.www-data /var/www/html
+RUN mkdir /data && chmod a+w /data
 
 USER www-data
