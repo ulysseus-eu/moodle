@@ -2,6 +2,18 @@
 
 Moodle in a container.
 
+# Running
+
+To start the container use the following command line:
+
+```
+docker run --publish $LOCAL_PORT:80 --volume $MOODLE_DATA_DIR:/data/ moodle-3.9
+```
+
+Where `LOCAL_PORT` is the port on the host system that you plan to connect to
+to access moodle and `MOODLE_DATA_DIR` is the moodle data directory on your
+system.
+
 # Build Moodle Container
 
 The build process of the docker image is reflected by the contents of
