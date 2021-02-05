@@ -12,9 +12,9 @@ $CFG->dbuser    = 'moodle';
 $CFG->dbpass    = '';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
-  'dbpersist' => 0,
-  'dbport' => 3306,
-  'dbsocket' => '/var/run/mysqld/mysqld.sock',
+  'dbpersist' => false,
+  'dbport' => '',
+  'dbsocket' => false,
   'dbcollation' => 'utf8mb4_0900_ai_ci',
 );
 
