@@ -18,6 +18,23 @@ You also need to provide several secrets to the container. Secrets are files
 containing sensitive information that need to be mounted into the container
 at start time. See _Secrets_ below for details.
 
+## Mount Points
+
+The directory containing the used shibboleth configuration must be mounted
+under `/etc/shibboleth`. The configuration is parsed by `mod_shib` to find
+the entity ID of the service provider.
+
+```
+--mount type=bind,source=/local/path/to/etc/shibboleth/,target=/etc/shibboleth
+```
+
+Also, a connection to the shibboleth unix socket is expected under
+`/run/shibboleth/shibd.sock`:
+
+```
+--mount type=bind,source=/local/path/to/shibd.sock,target=/run/shibboleth/shibd.sock
+```
+
 ## Secrets
 
 The image expects several secrets at defined mount points. The way to go is
