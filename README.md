@@ -1,6 +1,6 @@
 # Overview
 
-Moodle in a container.
+EDUC Moodle in a container.
 
 # Running
 
@@ -13,6 +13,57 @@ docker run --publish $LOCAL_PORT:80 --volume $MOODLE_DATA_DIR:/data/ moodle-3.9
 Where `LOCAL_PORT` is the port on the host system that you plan to connect to
 to access moodle and `MOODLE_DATA_DIR` is the moodle data directory on your
 system.
+
+You also need to provide several secrets to the container. Secrets are files
+containing sensitive information that need to be mounted into the container
+at start time. See _Secrets_ below for details.
+
+## Secrets
+
+The image expects several secrets at defined mount points. The way to go is
+using _docker-compose_ or _docker swarm_. See [docker swarm page on secrets](https://docs.docker.com/engine/swarm/secrets/)
+for details.
+
+The following files are expected to be mounted before you can run the image:
+
+`/run/secrets/learning.educalliance.eu.crt`: the SSL certificate to use in this
+    container
+
+`/run/secrets/learning.educalliance.eu.key`: the SSL private key to use in this
+    container
+
+### docker-compose
+
+docker-compose offers support for secrets:
+
+```
+version: "3.3"
+
+services:
+    moodle:
+        image: moodle-3.9
+        secrets:
+          - learning.educalliance.eu.crt
+          - learning.educalliance.eu.key
+
+secrets:
+    learning.educalliance.eu.crt:
+        file: /my/path/to/learning.educalliance.eu.crt
+    learning.educalliance.eu.key
+        file: /my/path/to/learning.educalliance.eu.key
+
+```
+
+
+### Command Line Testing
+
+For testing purposes the secrets can be mounted into the image as volumes when
+calling `docker run`. For instance, to mount `learning.educalliance.eu.crt` at
+start-up use the following flags:
+
+```
+--volume /my/path/to/learning.educalliance.eu.crt:/run/secrets/learning.educalliance.eu.crt
+```
 
 # Build Moodle Container
 
