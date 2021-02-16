@@ -1,0 +1,54 @@
+version: "3.3"
+services:
+    fetcher:
+        image: educ/metadata-fetcher
+
+        volumes:
+            - metadata:/var/lib/metadata
+
+    shibd:
+        image: educ/shibd:3.1
+
+        depends_on:
+            - fetcher
+
+        secrets:
+            - credential-resolver.crt
+            - credential-resolver.key
+
+        volumes:
+            - metadata:/var/lib/metadata
+            - ./shibd/etc/:/etc/shibboleth
+            - shibd_runtime:/var/run/shibboleth
+
+    moodle:
+        image: educ/moodle:3.9
+
+        depends_on:
+            - shibd
+
+        ports:
+            - 443:443
+
+        secrets:
+          - learning.educalliance.eu.crt
+          - learning.educalliance.eu.key
+
+        volumes:
+            - ./shibd/etc/:/etc/shibboleth
+            - shibd_runtime:/var/run/shibboleth
+            - ${MOODLE_DATA_DIR}:/data
+
+secrets:
+    learning.educalliance.eu.crt:
+        file: ${HTTPS_SERVER_CERTIFICATE}
+    learning.educalliance.eu.key:
+        file: ${HTTPS_SERVER_PKEY}
+    credential-resolver.crt:
+        file: ${SHIBBOLETH_SP_CERTIFICATE}
+    credential-resolver.key:
+        file: ${SHIBBOLETH_SP_PKEY}
+
+volumes:
+    shibd_runtime:
+    metadata:
