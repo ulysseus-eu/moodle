@@ -1,7 +1,7 @@
 #
 # Name of the final docker image.
 #
-DOCKER_IMAGE_NAME="moodle-3.9"
+DOCKER_IMAGE_NAME="educ/moodle:3.9"
 
 #
 # URL of the moodle git repository.
