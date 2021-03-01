@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod ssl headers shib
 
+RUN sed -i -e 's/Listen 80/# Listen 80/' /etc/apache2/ports.conf
+
 COPY --chown=root:root learning-ssl.conf /etc/apache2/sites-enabled
 COPY --chown=www-data:www-data moodle /var/www/html
 COPY --chown=www-data:www-data config.php /var/www/html/
