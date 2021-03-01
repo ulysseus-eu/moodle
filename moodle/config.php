@@ -6,16 +6,16 @@ $CFG = new stdClass();
 
 $CFG->dbtype    = 'mysqli';
 $CFG->dblibrary = 'native';
-$CFG->dbhost    = 'localhost';
-$CFG->dbname    = 'moodle';
-$CFG->dbuser    = 'moodle';
-$CFG->dbpass    = '';
+$CFG->dbhost    = 'db17.rz.uni-potsdam.de';
+$CFG->dbname    = 'moodle_educ';
+$CFG->dbuser    = 'moodle_educ';
+$CFG->dbpass    = file_get_contents("/run/secrets/moodle-db.pass");
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => false,
   'dbport' => '',
   'dbsocket' => false,
-  'dbcollation' => 'utf8mb4_0900_ai_ci',
+  'dbcollation' => 'utf8mb4_general_ci',
 );
 
 $CFG->wwwroot   = 'https://learning.educalliance.eu';
