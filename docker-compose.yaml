@@ -33,6 +33,7 @@ services:
         secrets:
           - learning.educalliance.eu.crt
           - learning.educalliance.eu.key
+          - moodle-db.pass
 
         volumes:
             - ./shibd/etc/:/etc/shibboleth
@@ -49,6 +50,8 @@ secrets:
         file: ${SHIBBOLETH_SP_CERTIFICATE}
     credential-resolver.key:
         file: ${SHIBBOLETH_SP_PKEY}
+    moodle-db.pass:
+        file: ${MYSQL_PASSWORD_FILE}
 
 volumes:
     shibd_runtime:
