@@ -40,6 +40,7 @@ services:
             - shibd_runtime:/var/run/shibboleth
             - ${MOODLE_DATA_DIR}:/data
             - ${MOODLE_RUNTIME_DIR}:/var/www/html
+            - ./moodle/config.php:/var/www/html/config.php
 
 secrets:
     learning.educalliance.eu.crt:
