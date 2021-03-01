@@ -1,77 +1,30 @@
 # Overview
 
-Moodle in a container.
+This is a `docker-compose`-based setup of the EDUC moodle platform. It supports
+SAML-based single sign-on via the shibboleth service provider and uses an
+external database and an external moodle data storage for to store its data.
 
-# Running
+The setup consists of the following components:
 
-To start the container use the following command line:
+- [Script to Periodically Fetch Metadata](metadata-fetcher)
+- [Shibboleth Service Provider](shibd)
+- [Moodle Hosted by Apache](moodle)
 
-```
-docker run --publish $LOCAL_PORT:80 --volume $MOODLE_DATA_DIR:/data/ moodle-3.9
-```
+# Usage
 
-Where `LOCAL_PORT` is the port on the host system that you plan to connect to
-to access moodle and `MOODLE_DATA_DIR` is the moodle data directory on your
-system.
+The setup is configured over environment variables. These variables should be
+defined using the `.env` file mechanism of `docker-compose`. A sample env file
+can be found under `.env-sample`.
 
-# Build Moodle Container
+For the setup to run, a set of container images must be available on the target
+machine. The required images can be created using the `Dockerfile`s in the
+contained sub-directories. To build all at once you can run `make build` from
+the top-level directory.
 
-The build process of the docker image is reflected by the contents of
-`Makefile`. The following sections describe the steps on the way to a
-working image and will also name the makefile target.
+Once all images are generated, you can use `docker-compose up` to start the
+setup.
 
-## In a Nutshell
+# Configuration
 
-Copy `config.php-sample` to `config.php`, edit at will and run
-
-```
-make build
-```
-
-## Fetch Moodle Sources
-
-See [moodle page on git](https://docs.moodle.org/39/en/Git_for_Administrators)
-for download instructions.
-
-Do
-
-```
-git clone git://git.moodle.org/moodle.git moodle
-git -C moodle branch --track MOODLE_39_STABLE origin/MOODLE_39_STABLE
-git -C moodle checkout MOODLE_39_STABLE
-
-```
-
-or
-
-```
-make update-moodle
-```
-
-to get the latest 3.9 version in the directory `moodle`.
-
-Note: in the Makefile this step is split into to targets `moodle` and
-`update-moodle`. While `moodle` will simply create the `moodle` directory
-the latter step is used to fetch the latest version of the moodle branch.
-
-## Configuration
-
-The container will not call the moodle install script and will instead use its
-own `config.php`. A sample configuration file is available in the repository
-under `config.php-sample`.
-
-## Build Container
-
-Run
-
-```
-docker build -t moodle-3.9 .
-```
-
-or
-
-```
-make build
-```
-
-to create a docker image using the latest moodle version.
+Configuration happens over the `.env` file mechanism described under _Usage_.
+For changing the container's behavior refer to the container sub-directories.
