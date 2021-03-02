@@ -1,13 +1,13 @@
 version: "3.3"
 services:
     fetcher:
-        image: educ/metadata-fetcher
+        image: learning.educalliance.eu:5000/educ/metadata-fetcher:latest
 
         volumes:
             - metadata:/var/lib/metadata
 
     shibd:
-        image: educ/shibd:3.1
+        image: learning.educalliance.eu:5000/educ/shibd:3.1
 
         depends_on:
             - fetcher
@@ -22,7 +22,7 @@ services:
             - shibd_runtime:/var/run/shibboleth
 
     moodle:
-        image: educ/moodle:3.9
+        image: learning.educalliance.eu:5000/educ/moodle:3.9
 
         depends_on:
             - shibd
