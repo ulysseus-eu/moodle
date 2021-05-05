@@ -17,6 +17,6 @@ RUN mkdir -p /opt && \
 
 RUN mkdir -p /opt/fetch
 
-COPY fetch-xml.sh dfn-aai.pem /opt/fetch/
+COPY fetch-xml.sh renater-metadata-signing-cert-2016.pem /opt/fetch/
 
 ENTRYPOINT /opt/fetch/fetch-xml.sh

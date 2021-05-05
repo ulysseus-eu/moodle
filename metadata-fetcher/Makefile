@@ -1,7 +1,7 @@
 #
 # Name of the final docker image.
 #
-DOCKER_IMAGE_NAME="educ/metadata-fetcher:latest"
+DOCKER_IMAGE_NAME="ulysseus/metadata-fetcher:latest"
 
 include ../defines.mk
 

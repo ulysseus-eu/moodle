@@ -8,8 +8,8 @@
 
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults entityID="https://learning.educalliance.eu/shibboleth"
-                         homeURL="https://learning.educalliance.eu/Shibboleth.sso/Session"
+    <ApplicationDefaults entityID="https://ulysseus.eu/shibboleth"
+                         homeURL="https://ulysseus.eu/learn/Shibboleth.sso/Session"
                          REMOTE_USER="persistent-id uniqueID"
                          cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
@@ -37,7 +37,7 @@
             -->
 
             <SSO discoveryProtocol="SAMLDS"
-                 discoveryURL="https://wayf.aai.dfn.de/DFN-AAI-eduGAIN/wayf">
+                 discoveryURL="https://web2.ulysseus.eu/waif/WAIF">
                 SAML2
             </SSO>
 
@@ -77,7 +77,7 @@
         templates, e.g., helpLocation below.
         -->
         <Errors access="accessError.html"
-                supportContact="support-educ@uni-potsdam.de"
+                supportContact="digitalplatform@ulysseus.eu"
                 helpLocation="https://www.switch.ch/aai/help"
                 logoLocation="https://www.switch.ch/aai/design/images/SWITCHaai.gif"
                 styleSheet="https://www.switch.ch/aai/design/shib-error.css"/>

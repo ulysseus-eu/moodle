@@ -139,19 +139,19 @@ update_metadata () {
 
 while [ 1 ]; do
 
-    update_metadata "http://www.aai.dfn.de/fileadmin/metadata/dfn-aai-idp-metadata.xml" \
-                    "/opt/fetch/dfn-aai.pem" \
+    update_metadata "https://pub.federation.renater.fr/metadata/renater/main/main-idps-renater-metadata.xml" \
+                    "/opt/fetch/renater-metadata-signing-cert-2016.pem" \
                     "$DESTINATION" \
-                    "https://idp.uni-potsdam.de/idp/shibboleth"
+                    "urn:mace:cru.fr:federation:unice.fr"
 
-    update_metadata "http://www.aai.dfn.de/fileadmin/metadata/dfn-aai-edugain+idp-metadata.xml" \
-                    "/opt/fetch/dfn-aai.pem" \
+    update_metadata "https://pub.federation.renater.fr/metadata/edugain/main/main-idps-edugain-metadata.xml" \
+                    "/opt/fetch/renater-metadata-signing-cert-2016.pem" \
                     "$DESTINATION" \
-                    "https://idp.pte.hu/saml2/idp/metadata.php" \
-                    "https://idp2.ics.muni.cz/idp/shibboleth" \
-                    "https://idp.unica.it/idp/shibboleth" \
-                    "https://upnidp2.parisnanterre.fr/idp/shibboleth" \
-                    "urn:mace:cru.fr:federation:univ-rennes1.fr"
+                    "https://idp.mci4me.at/idp/shibboleth" \
+                    "https://www.rediris.es/sir/usidp" \
+                    "https://idp.haaga-helia.fi/idp/shibboleth" \
+                    "https://unigepass.unige.it/idp" \
+                    "https://idp.tuke.sk/idp/shibboleth"
 
     sleep $UPDATE_INTERVAL
 done

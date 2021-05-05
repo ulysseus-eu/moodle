@@ -6,13 +6,10 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod ssl headers shib
 
-RUN sed -i -e 's/Listen 80/# Listen 80/' /etc/apache2/ports.conf
-RUN sed -i -e 's/SSLProtocol all -SSLv3/SSLProtocol TLSv1.3/' /etc/apache2/mods-available/ssl.conf
-
 COPY --chown=root:root learning-ssl.conf /etc/apache2/sites-enabled
 
 RUN mkdir /data && chmod a+w /data
 
-RUN echo "Servername learning.educalliance.eu" >> /etc/apache2/apache2.conf
+RUN echo "Servername ulysseus.eu" >> /etc/apache2/apache2.conf
 
 USER www-data

@@ -1,13 +1,13 @@
 version: "3.3"
 services:
     fetcher:
-        image: learning.educalliance.eu:5000/educ/metadata-fetcher:latest
+        image: localhost:5000/ulysseus/metadata-fetcher:latest
 
         volumes:
             - metadata:/var/lib/metadata
 
     shibd:
-        image: learning.educalliance.eu:5000/educ/shibd:3.1
+        image: localhost:5000/ulysseus/shibd:3.1
 
         depends_on:
             - fetcher
@@ -22,30 +22,30 @@ services:
             - shibd_runtime:/var/run/shibboleth
 
     moodle:
-        image: learning.educalliance.eu:5000/educ/moodle:3.9
+        image: localhost:5000/ulysseus/moodle:3.9
 
         depends_on:
             - shibd
 
         ports:
-            - 443:443
+            - 8081:80
 
         secrets:
-          - learning.educalliance.eu.crt
-          - learning.educalliance.eu.key
+          - self-signed.crt
+          - self-signed.key
           - moodle-db.pass
 
         volumes:
             - ./shibd/etc/:/etc/shibboleth
             - shibd_runtime:/var/run/shibboleth
-            - ${MOODLE_DATA_DIR}:/data
+            - moodle_data:/var/www/moodledata
             - ${MOODLE_RUNTIME_DIR}:/var/www/html
             - ./moodle/config.php:/var/www/html/config.php
 
 secrets:
-    learning.educalliance.eu.crt:
+    self-signed.crt:
         file: ${HTTPS_SERVER_CERTIFICATE}
-    learning.educalliance.eu.key:
+    self-signed.key:
         file: ${HTTPS_SERVER_PKEY}
     credential-resolver.crt:
         file: ${SHIBBOLETH_SP_CERTIFICATE}
@@ -55,5 +55,6 @@ secrets:
         file: ${MYSQL_PASSWORD_FILE}
 
 volumes:
+    moodle_data:
     shibd_runtime:
     metadata:
