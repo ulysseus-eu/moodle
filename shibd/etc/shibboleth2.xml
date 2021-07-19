@@ -8,9 +8,9 @@
 
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults entityID="https://ulysseus.eu/shibboleth"
+    <ApplicationDefaults entityID="https://ulysseus.eu/learn/shibboleth"
                          homeURL="https://ulysseus.eu/learn/Shibboleth.sso/Session"
-                         REMOTE_USER="persistent-id uniqueID"
+                         REMOTE_USER="eppn mail persistent-id uniqueID"
                          cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
         <!--
@@ -28,7 +28,8 @@
                   consistentAddress="true"
                   handlerSSL="true"
                   redirectLimit="host"
-                  cookieProps="https">
+                  cookieProps="https"
+                  handlerURL="/learn/Shibboleth.sso">
 
             <!--
             Configures SSO for a default IdP. To properly allow for >1 IdP, remove
@@ -37,7 +38,7 @@
             -->
 
             <SSO discoveryProtocol="SAMLDS"
-                 discoveryURL="https://web2.ulysseus.eu/waif/WAIF">
+                 discoveryURL="https://ulysseus.eu/wayf/WAYF">
                 SAML2
             </SSO>
 
@@ -64,7 +65,7 @@
             <!-- Session diagnostic service. -->
             <Handler type="Session"
                      Location="/Session"
-                     showAttributeValues="false"/>
+                     showAttributeValues="true"/>
 
             <!-- JSON feed of discovery information. -->
             <Handler type="DiscoveryFeed"
@@ -87,11 +88,8 @@
                           sourceDirectory="/var/lib/metadata"
                           id="metadata library"
                           validate="false"
-                          reloadInterval="3600">
-            <MetadataFilter type="EntityRoleWhiteList">
-                <RetainedRole>md:IDPSSODescriptor</RetainedRole>
-            </MetadataFilter>
-        </MetadataProvider>
+                          reloadInterval="3600"/>
+
 
         <!-- Map to extract attributes from SAML assertions. -->
         <AttributeExtractor type="XML"

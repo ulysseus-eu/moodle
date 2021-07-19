@@ -28,7 +28,7 @@ services:
             - shibd
 
         ports:
-            - 8081:80
+            - 4243:443
 
         secrets:
           - self-signed.crt
@@ -39,8 +39,8 @@ services:
             - ./shibd/etc/:/etc/shibboleth
             - shibd_runtime:/var/run/shibboleth
             - moodle_data:/var/www/moodledata
-            - ${MOODLE_RUNTIME_DIR}:/var/www/html
-            - ./moodle/config.php:/var/www/html/config.php
+            - ${MOODLE_RUNTIME_DIR}:/var/www/html/learn
+            - ./moodle/config.php:/var/www/html/learn/config.php
 
 secrets:
     self-signed.crt:

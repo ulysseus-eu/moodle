@@ -18,12 +18,12 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
-$CFG->wwwroot   = 'https://ulysseus.eu/learn-shib';
+$CFG->wwwroot   = 'https://ulysseus.eu/learn';
 $CFG->dataroot  = '/data';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
-$CFG->reverseproxy = true;
+// $CFG->reverseproxy = true;
 $CFG->sslproxy = true;
 
 // Store sessions in the database. When storing on disk, moodle tries to lock

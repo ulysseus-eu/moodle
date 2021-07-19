@@ -144,6 +144,11 @@ while [ 1 ]; do
                     "$DESTINATION" \
                     "urn:mace:cru.fr:federation:unice.fr"
 
+    update_metadata "https://pub.federation.renater.fr/metadata/test/preview/preview-idps-renater-test-metadata.xml" \
+                    "/opt/fetch/renater-metadata-signing-cert-2016.pem" \
+                    "$DESTINATION" \
+                    "urn:mace:cru.fr:federation:test-unice.fr"
+
     update_metadata "https://pub.federation.renater.fr/metadata/edugain/main/main-idps-edugain-metadata.xml" \
                     "/opt/fetch/renater-metadata-signing-cert-2016.pem" \
                     "$DESTINATION" \
@@ -151,7 +156,8 @@ while [ 1 ]; do
                     "https://www.rediris.es/sir/usidp" \
                     "https://idp.haaga-helia.fi/idp/shibboleth" \
                     "https://unigepass.unige.it/idp" \
-                    "https://idp.tuke.sk/idp/shibboleth"
+                    "https://idp.tuke.sk/idp/shibboleth" \
+                    "https://access-check.edugain.org/simplesaml/saml2/idp/metadata.php"
 
     sleep $UPDATE_INTERVAL
 done
