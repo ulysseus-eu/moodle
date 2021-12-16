@@ -2,12 +2,14 @@ version: "3.3"
 services:
     fetcher:
         image: localhost:5000/ulysseus/metadata-fetcher:latest
+        restart: unless-stopped
 
         volumes:
             - metadata:/var/lib/metadata
 
     shibd:
         image: localhost:5000/ulysseus/shibd:3.1
+        restart: unless-stopped
 
         depends_on:
             - fetcher
@@ -21,8 +23,12 @@ services:
             - ./shibd/etc/:/etc/shibboleth
             - shibd_runtime:/var/run/shibboleth
 
+        environment:
+            - URL_DIRECTORY_ON_WEB_SERVER=${URL_DIRECTORY_ON_WEB_SERVER}
+
     moodle:
         image: localhost:5000/ulysseus/moodle:3.9
+        restart: unless-stopped
 
         depends_on:
             - shibd
@@ -38,9 +44,12 @@ services:
         volumes:
             - ./shibd/etc/:/etc/shibboleth
             - shibd_runtime:/var/run/shibboleth
-            - moodle_data:/var/www/moodledata
-            - ${MOODLE_RUNTIME_DIR}:/var/www/html/learn
-            - ./moodle/config.php:/var/www/html/learn/config.php
+            - ./moodle/data:/var/www/moodledata
+            - ${MOODLE_RUNTIME_DIR}:/var/www/html/${URL_DIRECTORY_ON_WEB_SERVER}
+            - ./moodle/config.php:/var/www/html/${URL_DIRECTORY_ON_WEB_SERVER}/config.php
+
+        environment:
+            - URL_DIRECTORY_ON_WEB_SERVER=${URL_DIRECTORY_ON_WEB_SERVER}
 
 secrets:
     self-signed.crt:
