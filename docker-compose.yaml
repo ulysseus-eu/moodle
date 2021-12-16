@@ -27,7 +27,7 @@ services:
             - URL_DIRECTORY_ON_WEB_SERVER=${URL_DIRECTORY_ON_WEB_SERVER}
 
     moodle:
-        image: localhost:5000/ulysseus/moodle:3.9
+        image: localhost:5000/ulysseus/moodle:3.10
         restart: unless-stopped
 
         depends_on:
@@ -44,7 +44,7 @@ services:
         volumes:
             - ./shibd/etc/:/etc/shibboleth
             - shibd_runtime:/var/run/shibboleth
-            - ./moodle/data:/var/www/moodledata
+            - ${MOODLE_DATA_DIR}:/var/www/moodledata
             - ${MOODLE_RUNTIME_DIR}:/var/www/html/${URL_DIRECTORY_ON_WEB_SERVER}
             - ./moodle/config.php:/var/www/html/${URL_DIRECTORY_ON_WEB_SERVER}/config.php
 
