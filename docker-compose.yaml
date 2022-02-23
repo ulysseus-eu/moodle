@@ -47,6 +47,7 @@ services:
             - ${MOODLE_DATA_DIR}:/var/www/moodledata
             - ${MOODLE_RUNTIME_DIR}:/var/www/html/${URL_DIRECTORY_ON_WEB_SERVER}
             - ./moodle/config.php:/var/www/html/${URL_DIRECTORY_ON_WEB_SERVER}/config.php
+            - ./moodle/php.ini:/usr/local/etc/php/php.ini
 
         environment:
             - URL_DIRECTORY_ON_WEB_SERVER=${URL_DIRECTORY_ON_WEB_SERVER}
